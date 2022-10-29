@@ -1,9 +1,9 @@
-package robotwar.common.robotbase;
+package robotwars.designrobots.common.robotbase;
 
 import java.awt.Graphics;
 import java.time.LocalTime;
 
-import robotwar.common.IConstants;
+import robotwars.designrobots.common.IConstants;
 
 public class IRobot implements IConstants {
 	private int energy;
