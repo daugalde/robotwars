@@ -1,4 +1,4 @@
-package robotwar.common.robotbase;
+package designrobots.common.robotbase;
 
 public class DamageLevel {
 	private double level;

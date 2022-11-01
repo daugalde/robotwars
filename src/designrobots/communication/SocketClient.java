@@ -1,4 +1,4 @@
-package robotwar.communication;
+package designrobots.communication;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -17,7 +17,7 @@ public class SocketClient extends Thread {
     
 	public SocketClient(String pIpAddress, int pPort) throws Exception {
 		try {
-			Socket socket = new Socket( pIpAddress, pPort);
+			Socket socket = new Socket(pIpAddress, pPort);
 			setSocket(socket);
 		} catch (Exception ex) {
 			ex.printStackTrace();

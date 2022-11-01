@@ -1,4 +1,4 @@
-package robotwar.common.robotbase;
+package designrobots.common.robotbase;
 
 public enum MOVEMENT {
 	LEFT(0), RIGHT(1), UP(2), DOWN(3);

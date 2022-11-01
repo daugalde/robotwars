@@ -1,4 +1,4 @@
-package robotwar.common.robotbase;
+package designrobots.common.robotbase;
 
 public enum ORIENTATION {
 	NORTH(0), SOUTH(1), EAST(2), WEST(3);

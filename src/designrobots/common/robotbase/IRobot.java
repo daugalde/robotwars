@@ -1,11 +1,11 @@
-package robotwars.designrobots.common.robotbase;
+package designrobots.common.robotbase;
 
 import java.awt.Graphics;
 import java.time.LocalTime;
 
-import robotwars.designrobots.common.IConstants;
+import designrobots.common.IConstants;
 
-public class IRobot implements IConstants {
+public class IRobot implements IConstants { 
 	private int energy;
 	private int posX;
 	private int posY;
@@ -34,6 +34,7 @@ public class IRobot implements IConstants {
 	 */
 	public void move(MOVEMENT pMove, LocalTime pActionTime, Graphics g) {
 		// put your code here
+		//se mueve con las flechas direccionales, el robot va a tener un consumo de energia de 1 punto por cada 1000 pixeles recorridos
 	}
 	
 	public void hit(int pStrikeId, LocalTime pActionTime, Graphics g ) {
@@ -62,6 +63,22 @@ public class IRobot implements IConstants {
 	public void addWeapon(Weapon pStrike) {
 		weapons[weaponIndex] = pStrike;
 		weaponIndex=++weaponIndex%WEAPONS_PER_ROBOT;
+	}
+
+	public int getEnergy() {
+		return energy;
+	}
+
+	public void setEnergy(int energy) {
+		this.energy = energy;
+	}
+
+	public Weapon[] getWeapons() {
+		return weapons;
+	}
+
+	public Weapon[] getStrikes() {
+		return strikes;
 	}
 	
 }

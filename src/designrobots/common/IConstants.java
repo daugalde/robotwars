@@ -1,4 +1,4 @@
-package robotwar.common;
+package designrobots.common;
 
 public interface IConstants {
 	/* ARENA */

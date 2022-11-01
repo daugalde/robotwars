@@ -1,11 +1,11 @@
-package robotwar.common.robotbase;
+package designrobots.common.robotbase;
 
 public abstract class Weapon extends DamageLevel {
 	private int posX;
 	private int posY;
 	private int speed;
 	
-	public Weapon(int pSpeed) {
+	protected Weapon(int pSpeed) {
 		this.speed = pSpeed;
 	}
 	

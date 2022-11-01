@@ -1,9 +1,9 @@
-package robotwar.test;
+package designrobots.test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import robotwar.communication.SocketClient;
+import designrobots.communication.SocketClient;
 
 public class PersonasClient {
 
@@ -24,7 +24,7 @@ public class PersonasClient {
 			SocketClient clienteTemas = new SocketClient("localhost", 10000);
 			SocketClient clientePersonas = new SocketClient("127.0.0.1", 10000);
 						
-			while (temas.size()>0 && personas.size()>0) {
+			while (!temas.isEmpty() && !personas.isEmpty()) {
 				int temaId = (int)Math.random()*temas.size();
 				int personaId = (int)Math.random()*personas.size();
 

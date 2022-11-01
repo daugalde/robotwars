@@ -1,6 +1,6 @@
-package robotwar.test;
+package designrobots.test;
 
-import robotwar.communication.*;
+import designrobots.communication.*;
 
 public class Server {
 

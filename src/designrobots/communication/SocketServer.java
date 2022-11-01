@@ -1,4 +1,4 @@
-package robotwar.communication;
+package designrobots.communication;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -35,6 +35,6 @@ public class SocketServer implements Runnable {
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
-		}
+		} 
 	}
 }
