@@ -5,17 +5,17 @@ import java.time.LocalTime;
 
 import designrobots.common.IConstants;
 
-public class IRobot implements IConstants { 
-	private int energy;
-	private int posX;
-	private int posY;
-	private int strikeIndex;
-	private int weaponIndex;
-	private Weapon weapons[];
-	private Weapon strikes[];
-	private DamageLevel directionsdamage[];
+public class IRobot implements IConstants {
+	protected int energy;
+	protected int posX;
+	protected int posY;
+	protected int strikeIndex;
+	protected int weaponIndex;
+	protected Weapon weapons[];
+	protected Weapon strikes[];
+	protected DamageLevel directionsdamage[];
 	
-	public IRobot(Weapon pdirections, DamageLevel pweapons) {
+	public IRobot() {
 		directionsdamage = new DamageLevel[MOVEMENT.values().length];
 		weapons = new Weapon[WEAPONS_PER_ROBOT];
 		strikes = new Weapon[STRIKES_PER_ROBOT];
@@ -34,7 +34,6 @@ public class IRobot implements IConstants {
 	 */
 	public void move(MOVEMENT pMove, LocalTime pActionTime, Graphics g) {
 		// put your code here
-		//se mueve con las flechas direccionales, el robot va a tener un consumo de energia de 1 punto por cada 1000 pixeles recorridos
 	}
 	
 	public void hit(int pStrikeId, LocalTime pActionTime, Graphics g ) {
@@ -64,21 +63,6 @@ public class IRobot implements IConstants {
 		weapons[weaponIndex] = pStrike;
 		weaponIndex=++weaponIndex%WEAPONS_PER_ROBOT;
 	}
-
-	public int getEnergy() {
-		return energy;
-	}
-
-	public void setEnergy(int energy) {
-		this.energy = energy;
-	}
-
-	public Weapon[] getWeapons() {
-		return weapons;
-	}
-
-	public Weapon[] getStrikes() {
-		return strikes;
-	}
 	
 }
+

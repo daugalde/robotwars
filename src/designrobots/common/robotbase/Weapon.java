@@ -4,6 +4,7 @@ public abstract class Weapon extends DamageLevel {
 	private int posX;
 	private int posY;
 	private int speed;
+	private int weaponlevel;
 	
 	protected Weapon(int pSpeed) {
 		this.speed = pSpeed;
