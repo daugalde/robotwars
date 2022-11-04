@@ -4,7 +4,8 @@ import java.util.Arrays;
 
 public class FireForceRobot extends IRobot {
 	//su weapon va a ser disparar una bola de fuego, es nivel 7
-	//sus strikes son "Golpe directo" nivel 2 y "Spiky Hit" nivel 5
+	//otra weapon es disparar un shock electrico de nivel 5
+	//sus strikes son "Golpe directo" nivel 2 y "Spiky Hit" nivel 5, "Fire Punch" nivel 6
 
 	private DamageLevel[][] elementos = {weapons, strikes, directionsdamage}; //sera para elegir por random que cosa se daña en caso de damage()
 	private int random;
@@ -13,8 +14,9 @@ public class FireForceRobot extends IRobot {
 	private boolean available;
 	private int index;
 	private DamageLevel[] damaged;
+	private static FireForceRobot thisRobot = null;
 
-	public FireForceRobot(Weapon pdirections, DamageLevel pweapons) {
+	public FireForceRobot(ORIENTATION pOrientation) {
 		super();	
 	}
 
@@ -64,4 +66,12 @@ public class FireForceRobot extends IRobot {
 			}
 		}
 	}
+
+	public static FireForceRobot getInstance(ORIENTATION pOrientation) {
+		//singleton
+		if (thisRobot == null) {
+			thisRobot = new FireForceRobot(pOrientation)
+		}
+        return thisRobot;
+    }
 }
