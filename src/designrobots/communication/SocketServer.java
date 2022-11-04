@@ -35,6 +35,6 @@ public class SocketServer implements Runnable {
 			
 		} catch (Exception ex) {
 			ex.printStackTrace();
-		} 
+		}
 	}
 }

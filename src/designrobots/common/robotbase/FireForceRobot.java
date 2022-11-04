@@ -70,7 +70,7 @@ public class FireForceRobot extends IRobot {
 	public static FireForceRobot getInstance(ORIENTATION pOrientation) {
 		//singleton
 		if (thisRobot == null) {
-			thisRobot = new FireForceRobot(pOrientation)
+			thisRobot = new FireForceRobot(pOrientation);
 		}
         return thisRobot;
     }
