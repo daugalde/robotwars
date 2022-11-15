@@ -76,23 +76,23 @@ public class Controller implements Runnable {
         }
     }
 
-    public void setMovement(int enviar) {
+    public void setMovement(int move) {
 
         try {
-            server.getOutputStream().writeInt(enviar);
+            server.getOutputStream().writeInt(move);
             
             server.getOutputStream().flush();
 
-            if (enviar == 1) {
+            if (move == 1) {
                 this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX() + 1, this.view.getPlayer1Label().getY());
             }
-            if (enviar == 2) {
+            if (move == 2) {
                 this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX() - 1, this.view.getPlayer1Label().getY());
             }
-            if (enviar == 3) {
+            if (move == 3) {
                 this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX(), this.view.getPlayer1Label().getY() - 1);
             }
-            if (enviar == 4) {
+            if (move == 4) {
                 this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX(), this.view.getPlayer1Label().getY() + 1);
             }
 

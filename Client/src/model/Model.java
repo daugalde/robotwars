@@ -1,22 +1,13 @@
-package negocio.Administrador;
+package model;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.Socket;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import negocio.ObjetosEspecificos.Cliente;
 
 /**
  *
  * @author David
  */
-public class Administrador {
+public class Model {
 
     private JLabel jugador;
     private JLabel jugador2;
@@ -25,89 +16,18 @@ public class Administrador {
     private int puntosj2;
     private JTextField caja1;
     private JTextField caja2;
-    private Cliente c;
-    private DataOutputStream salida;
-    private DataInputStream entrada;
+    
     private JLabel mensaje;
-    private String servidorChat;
 
-    public Administrador() {
-    }
-
-    public Administrador(String servidorChat) {
-        setC(new Cliente());
+    public Model() {
         setObj(new JLabel[15]);
         setMensaje(new JLabel());
-        setServidorChat(servidorChat);
         setCaja1(new JTextField());
         setCaja2(new JTextField());
-
-    }
-
-    public void conectarAServidor() throws IOException {
-
-        mostrarMensaje("Intentando realizar conexion\n");
-        c.setCliente(new Socket(InetAddress.getByName(servidorChat), 12345));
-        mostrarMensaje("Conectado a: " + c.getCliente().getInetAddress().getHostName());
-
-    }
-
-    public void obtenerFlujos() throws IOException {
-        salida = new DataOutputStream(new BufferedOutputStream(c.getCliente().getOutputStream()));
-        entrada = new DataInputStream(new BufferedInputStream(c.getCliente().getInputStream()));
-    }
-
-    public void procesarConexion() throws IOException {
-
-        do {
-
-            try {
-
-                if (entrada.readInt() == 1) {
-                    getJugador().setLocation(getJugador().getX() + 4, getJugador().getY());
-                   // borraImagen(getJugador(), 1);
-                    
-                }
-                if (entrada.readInt() == 2) {
-                    getJugador().setLocation(getJugador().getX() - 4, getJugador().getY());
-                   // borraImagen(getJugador(), 1);
-                    
-                }
-                if (entrada.readInt() == 3) {
-                    getJugador().setLocation(getJugador().getX(), getJugador().getY() - 4);
-                 //   borraImagen(getJugador(), 1);
-                        
-                }
-                if (entrada.readInt() == 4) {
-                    getJugador().setLocation(getJugador().getX(), getJugador().getY() + 4);
-                  //  borraImagen(getJugador(), 1);
-                  
-                }
-
-                asignaP();
-            } 
-            catch (Exception ex) {
-                mostrarMensaje("\nSe recibio un tipo de objeto desconocido");
-            }
-
-        } while (true);
-
-    }
-
-    public void cerrarConexion() {
-        mostrarMensaje("\nCerrando conexion");
-
-        try {
-            salida.close();
-            entrada.close();
-            c.getCliente().close();
-        } catch (IOException excepcionES) {
-            excepcionES.printStackTrace();
-        }
     }
 
     public void enviarDatos(int enviar) {
-
+/*
         try {
 
             if (enviar == 1) {
@@ -142,7 +62,7 @@ public class Administrador {
             asignaP();
             quienGana();
         } catch (IOException excepcionES) {
-        }
+        }*/
     }
     
     public void asignaP(){
@@ -273,28 +193,12 @@ public class Administrador {
         }*/
     }
 
-    public Cliente getC() {
-        return c;
-    }
-
-    public void setC(Cliente c) {
-        this.c = c;
-    }
-
     public JLabel getMensaje() {
         return mensaje;
     }
 
     public void setMensaje(JLabel mensaje) {
         this.mensaje = mensaje;
-    }
-
-    public String getServidorChat() {
-        return servidorChat;
-    }
-
-    public void setServidorChat(String servidorChat) {
-        this.servidorChat = servidorChat;
     }
 
     public JLabel getJugador() {

@@ -1,72 +1,121 @@
 package controller;
 
+import comunication.Client;
+import java.awt.event.KeyEvent;
 import view.View;
 import java.io.EOFException;
 import java.io.IOException;
-import negocio.Administrador.Administrador;
+import model.Model;
 
 /**
  *
  * @author David
  */
-public class Controller extends Thread {
+public class Controller implements Runnable {
 
-    private Administrador admin;
+    private Model model;
+    private final View view;
+    private Client client;
 
-    public Controller() {
-        setAdmin(new Administrador("localhost"));
-    }
-    
-    public Controller(String conexion) {
-        
-        setAdmin(new Administrador(conexion));
-    }
+    public Controller(String hostName) {
+        client = new Client(hostName);
+        this.view = new View();
+        this.model = new Model();
 
-    public Administrador getAdmin() {
-        return admin;
-    }
+        this.view.getView().addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    setMovement(1);
+                }
 
-    public void setAdmin(Administrador admin) {
-        this.admin = admin;
+                if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
+                    setMovement(2);
+                }
+
+                if (evt.getKeyCode() == KeyEvent.VK_UP) {
+                    setMovement(3);
+                }
+
+                if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
+                    setMovement(4);
+                }
+            }
+        });
     }
 
     public void run() {
-        
+
         while (true) {
             try {
-                getAdmin().conectarAServidor();   // Paso 1: crear un socket para realizar la conexion
+                client.tryToConnect();
 
-                getAdmin().obtenerFlujos();       // Paso 2: obtener los flujos de entrada y salida
+                client.setStreams();
 
-                getAdmin().procesarConexion();     // Paso 3: procesar la conexion
-                     
-            } // el servidor cerro la conexion
+                do {
+
+                    try {
+
+                        if (client.getInputStream().readInt() == 1) {
+                            this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX() + 4, this.view.getPlayer1Label().getY());
+                        }
+                        if (client.getInputStream().readInt() == 2) {
+                             this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX() - 4, this.view.getPlayer1Label().getY());
+                        }
+                        if (client.getInputStream().readInt() == 3) {
+                            this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX(), this.view.getPlayer1Label().getY() - 4);
+                        }
+                        if (client.getInputStream().readInt() == 4) {
+                            this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX(), this.view.getPlayer1Label().getY() + 4);
+                        }
+
+                    } catch (Exception ex) {
+                        //mostrarMensaje("\nSe recibio un tipo de objeto desconocido");
+                    }
+
+                } while (true);
+
+            }
             catch (EOFException excepcionEOF) {
-                System.err.println("El cliente termino la conexion");
-            } // procesar los problemas que pueden ocurrir al comunicarse con el servidor
+                System.err.println("Client Close Connection");
+            }
             catch (IOException excepcionES) {
                 excepcionES.printStackTrace();
-            } 
-            finally {
-                getAdmin().cerrarConexion(); // Paso 4: cerrar la conexion
+            } finally {
+                client.closeConnection();
             }
         }
-       
-    }
-    
-    public void asigna(View p)  {
-       
-        getAdmin().setMensaje(p.getJLabel3());
-        getAdmin().setJugador(p.getJLabel1());
-        getAdmin().setJugador2(p.getJLabel2());       
-        
-        getAdmin().getJugador().setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Images/avion.gif")));
-        getAdmin().getJugador2().setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Images/robot2.gif")));   
     }
 
-    public void datos(int p ) {
-        getAdmin().enviarDatos(p);       
-    }    
-   
-   
+    public void setMovement(int move) {
+        try {
+            client.getOutputStream().writeInt(move);
+
+            client.getOutputStream().flush();
+
+            if (move == 1) {
+                this.view.getPlayer2Label().setLocation(this.view.getPlayer2Label().getX() + 1, this.view.getPlayer2Label().getY());
+            }
+            if (move == 2) {
+                this.view.getPlayer2Label().setLocation(this.view.getPlayer2Label().getX() - 1, this.view.getPlayer2Label().getY());
+            }
+            if (move == 3) {
+                this.view.getPlayer2Label().setLocation(this.view.getPlayer2Label().getX(), this.view.getPlayer2Label().getY() - 1);
+            }
+            if (move == 4) {
+                this.view.getPlayer2Label().setLocation(this.view.getPlayer2Label().getX(), this.view.getPlayer2Label().getY() + 1);
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
 }
