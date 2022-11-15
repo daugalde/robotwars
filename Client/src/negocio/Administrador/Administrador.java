@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package negocio.Administrador;
 
 import java.io.BufferedInputStream;
@@ -9,8 +5,6 @@ import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import javax.swing.JLabel;
@@ -59,11 +53,6 @@ public class Administrador {
     }
 
     public void obtenerFlujos() throws IOException {
-        /*
-        salida = new ObjectOutputStream(c.getCliente().getOutputStream());
-        salida.flush();
-        entrada = new ObjectInputStream(c.getCliente().getInputStream());
-        */
         salida = new DataOutputStream(new BufferedOutputStream(c.getCliente().getOutputStream()));
         entrada = new DataInputStream(new BufferedInputStream(c.getCliente().getInputStream()));
     }
@@ -291,23 +280,7 @@ public class Administrador {
     public void setC(Cliente c) {
         this.c = c;
     }
-/*
-    public ObjectOutputStream getSalida() {
-        return salida;
-    }
 
-    public void setSalida(ObjectOutputStream salida) {
-        this.salida = salida;
-    }
-
-    public ObjectInputStream getEntrada() {
-        return entrada;
-    }
-
-    public void setEntrada(ObjectInputStream entrada) {
-        this.entrada = entrada;
-    }
-*/
     public JLabel getMensaje() {
         return mensaje;
     }

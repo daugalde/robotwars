@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import view.View;
@@ -65,8 +61,7 @@ public class Controller extends Thread {
         getAdmin().setJugador2(p.getJLabel2());       
         
         getAdmin().getJugador().setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Images/avion.gif")));
-        getAdmin().getJugador2().setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Images/robot2.gif")));
-        //getAdmin().llenaVec(p.getJ0(), p.getJ1(), p.getJ2(), p.getJ3(), p.getJ4(), p.getJ5(), p.getJ6(), p.getJ7(), p.getJ8(), p.getJ9(), p.getJ10(), p.getJ11(), p.getJ12(), p.getJ13(), p.getJ14(),p.getT1(),p.getT2());    
+        getAdmin().getJugador2().setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Images/robot2.gif")));   
     }
 
     public void datos(int p ) {

@@ -21,7 +21,7 @@ public class Panel extends javax.swing.JPanel {
     
    public void paintComponent(Graphics g){
         Dimension size = getSize();
-        ImageIcon background = new ImageIcon(getClass().getResource("/assets/Images/BattleField1.png"));
+        ImageIcon background = new ImageIcon(getClass().getResource("/assets/BattleField1.png"));
         g.drawImage(background.getImage(),0,0,size.width, size.height, null);
         setOpaque(false);
         super.paintComponent(g);    
