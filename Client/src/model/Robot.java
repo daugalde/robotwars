@@ -13,14 +13,15 @@ import robotwar.common.robotbase.DamageLevel;
 
 /**
  *
- * @author David
+ * @author Sarah
  */
 public class Robot extends IRobot{
-    
     
     //su weapon va a ser disparar una bola de fuego, es nivel 7
     //otra weapon es disparar un shock electrico de nivel 5
     //sus strikes son "Golpe directo" nivel 2 y "Spiky Hit" nivel 5, "Fire Punch" nivel 6
+    
+    private JLabel player2;
     private DamageLevel[][] elementos = {weapons, strikes, directionsdamage}; //sera para elegir por random que cosa se daña en caso de damage()
     private int random;
     private int random2;
@@ -30,8 +31,16 @@ public class Robot extends IRobot{
     private DamageLevel[] damaged;
     private static Robot thisRobot = null;
     
-    public Robot(ORIENTATION pOrientation) {
-        super();	
+    public Robot(JLabel p2) {
+        this.player2 = p2;
+    }
+
+    public JLabel getPlayer2() {
+        return player2;
+    }
+
+    public void setPlayer2(JLabel p2) {
+        this.player2 = p2;
     }
     
     @Override
@@ -81,17 +90,32 @@ public class Robot extends IRobot{
         }
     }
     
-    public static Robot getInstance(ORIENTATION pOrientation) {
+    public static Robot getInstance(JLabel label) {
         //singleton
         if (thisRobot == null) {
-            thisRobot = new Robot(pOrientation);
+            thisRobot = new Robot(label);
         }
         return thisRobot;
     }
 
 
     protected void refreshMove(MOVEMENT mvmnt, LocalTime lt, Graphics grphcs) {
-        System.out.println("Move robot");
+        
+        if (mvmnt.getValue() == 0) {
+            player2.setLocation(player2.getX() - 1, player2.getY());
+        }
+        if (mvmnt.getValue() == 1) {
+            System.out.println("Move robot");
+            player2.setLocation(player2.getX() + 1, player2.getY());
+        }
+
+        if (mvmnt.getValue() == 3) {
+            player2.setLocation(player2.getX(), player2.getY() + 1);
+        }
+
+        if (mvmnt.getValue() == 2) {
+            player2.setLocation(player2.getX(), player2.getY() - 1);
+        }
     }
     
     
