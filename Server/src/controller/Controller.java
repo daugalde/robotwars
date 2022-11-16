@@ -4,7 +4,9 @@ import comunication.SocketServer;
 import java.awt.event.KeyEvent;
 import view.View;
 import java.io.IOException;
-import model.Model;
+import java.time.LocalTime;
+import model.Robot;
+import robotwar.common.robotbase.MOVEMENT;
 
 /**
  *
@@ -13,31 +15,31 @@ import model.Model;
 public class Controller implements Runnable {
 
     private final View view;
-    private Model model;
+    private Robot player1;
     private SocketServer server;
 
     public Controller() throws IOException {
         server = new SocketServer();
-        this.model = new Model();
         this.view = new View();
-
+        this.player1 = new Robot(this.view.getPlayer1Label());
+        
         this.view.getView().addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    setMovement(1);
-                }
-
                 if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
-                    setMovement(2);
+                    setMovement(MOVEMENT.LEFT);
+                }
+                
+                if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    setMovement(MOVEMENT.RIGHT);
                 }
 
                 if (evt.getKeyCode() == KeyEvent.VK_UP) {
-                    setMovement(3);
+                    setMovement(MOVEMENT.UP);
                 }
 
                 if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
-                    setMovement(4);
+                    setMovement(MOVEMENT.DOWN);
                 }
             }
         });
@@ -53,16 +55,18 @@ public class Controller implements Runnable {
                 server.setStreams();
 
                 do {
+                    if (server.getInputStream().readInt() == 0) {
+                        this.view.getPlayer2Label().setLocation(this.view.getPlayer2Label().getX() - 4, this.view.getPlayer2Label().getY());
+                    }
+                    
                     if (server.getInputStream().readInt() == 1) {
                         this.view.getPlayer2Label().setLocation(this.view.getPlayer2Label().getX() + 4, this.view.getPlayer2Label().getY());
                     }
+                    
                     if (server.getInputStream().readInt() == 2) {
-                        this.view.getPlayer2Label().setLocation(this.view.getPlayer2Label().getX() - 4, this.view.getPlayer2Label().getY());
-                    }
-                    if (server.getInputStream().readInt() == 3) {
                         this.view.getPlayer2Label().setLocation(this.view.getPlayer2Label().getX(), this.view.getPlayer2Label().getY() - 4);
                     }
-                    if (server.getInputStream().readInt() == 4) {
+                    if (server.getInputStream().readInt() == 3) {
                         this.view.getPlayer2Label().setLocation(this.view.getPlayer2Label().getX(), this.view.getPlayer2Label().getY() + 4);
                     }
 
@@ -76,36 +80,25 @@ public class Controller implements Runnable {
         }
     }
 
-    public void setMovement(int move) {
+    public void setMovement(MOVEMENT move) {
 
         try {
-            server.getOutputStream().writeInt(move);
+            server.getOutputStream().writeInt(move.getValue());
             
             server.getOutputStream().flush();
-
-            if (move == 1) {
-                this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX() + 1, this.view.getPlayer1Label().getY());
-            }
-            if (move == 2) {
-                this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX() - 1, this.view.getPlayer1Label().getY());
-            }
-            if (move == 3) {
-                this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX(), this.view.getPlayer1Label().getY() - 1);
-            }
-            if (move == 4) {
-                this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX(), this.view.getPlayer1Label().getY() + 1);
-            }
+            
+            this.player1.move(move, LocalTime.MIN, null);
 
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    public Model getModel() {
-        return model;
+    public Robot getModel() {
+        return player1;
     }
 
-    public void setModel(Model admin) {
-        this.model = admin;
+    public void setModel(Robot admin) {
+        this.player1 = admin;
     }
 }

@@ -25,20 +25,21 @@ public class Controller implements Runnable {
         this.view.getView().addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
             public void keyPressed(java.awt.event.KeyEvent evt) {
+                
+                if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
+                    setMovement(0);
+                }
+                
                 if (evt.getKeyCode() == KeyEvent.VK_RIGHT) {
                     setMovement(1);
                 }
 
-                if (evt.getKeyCode() == KeyEvent.VK_LEFT) {
+                if (evt.getKeyCode() == KeyEvent.VK_UP) {
                     setMovement(2);
                 }
 
-                if (evt.getKeyCode() == KeyEvent.VK_UP) {
-                    setMovement(3);
-                }
-
                 if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
-                    setMovement(4);
+                    setMovement(3);
                 }
                 
                 if (evt.getKeyCode() == KeyEvent.VK_1) {
@@ -61,16 +62,16 @@ public class Controller implements Runnable {
 
                     try {
 
+                        if (client.getInputStream().readInt() == 0) {
+                             this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX() - 4, this.view.getPlayer1Label().getY());
+                        }
                         if (client.getInputStream().readInt() == 1) {
                             this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX() + 4, this.view.getPlayer1Label().getY());
                         }
                         if (client.getInputStream().readInt() == 2) {
-                             this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX() - 4, this.view.getPlayer1Label().getY());
-                        }
-                        if (client.getInputStream().readInt() == 3) {
                             this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX(), this.view.getPlayer1Label().getY() - 4);
                         }
-                        if (client.getInputStream().readInt() == 4) {
+                        if (client.getInputStream().readInt() == 3) {
                             this.view.getPlayer1Label().setLocation(this.view.getPlayer1Label().getX(), this.view.getPlayer1Label().getY() + 4);
                         }
 
@@ -98,16 +99,16 @@ public class Controller implements Runnable {
 
             client.getOutputStream().flush();
 
+            if (move == 0) {
+                this.view.getPlayer2Label().setLocation(this.view.getPlayer2Label().getX() - 1, this.view.getPlayer2Label().getY());
+            }
             if (move == 1) {
                 this.view.getPlayer2Label().setLocation(this.view.getPlayer2Label().getX() + 1, this.view.getPlayer2Label().getY());
             }
             if (move == 2) {
-                this.view.getPlayer2Label().setLocation(this.view.getPlayer2Label().getX() - 1, this.view.getPlayer2Label().getY());
-            }
-            if (move == 3) {
                 this.view.getPlayer2Label().setLocation(this.view.getPlayer2Label().getX(), this.view.getPlayer2Label().getY() - 1);
             }
-            if (move == 4) {
+            if (move == 3) {
                 this.view.getPlayer2Label().setLocation(this.view.getPlayer2Label().getX(), this.view.getPlayer2Label().getY() + 1);
             }
 
