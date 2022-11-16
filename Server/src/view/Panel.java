@@ -22,6 +22,7 @@ public class Panel extends javax.swing.JPanel implements ActionListener {
     
     private Weapon weapon;
     private Timer timer;
+    private Image bullet ;
     private int x = 0;
     private int y = 0;
     
@@ -46,7 +47,7 @@ public class Panel extends javax.swing.JPanel implements ActionListener {
         
         Graphics2D g2D = (Graphics2D) g;
         Dimension size = getSize();
-        Image bullet = weapon.getImage();
+        bullet = weapon.getImage();
         g2D.drawImage(bullet, x, y, null);
     }
     
@@ -83,7 +84,7 @@ public class Panel extends javax.swing.JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        this.bullet = weapon.getImage();
         x =  weapon.getX() + x;
         y = weapon.getY() ;
         repaint();

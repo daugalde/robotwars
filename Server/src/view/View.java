@@ -40,10 +40,10 @@ public class View {
         messageLabel.setText("");
 
         trap1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        trap1.setText("1");
+        trap1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/obj2.gif")));
 
         trap2.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        trap2.setText("3");
+        trap2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/obj1.gif")));
 
         scorePlayer1.setValue(100);
         scorePlayer1.setStringPainted(true);

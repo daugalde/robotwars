@@ -16,9 +16,13 @@ import view.Panel;
 public class Robot extends IRobot {
 
     private JLabel player1;
+    private Weapon currentWeapon;
+    private Saw currentHit;
 
     public Robot(JLabel p1) {
         this.player1 = p1;
+        this.currentWeapon = new Weapon();
+        this.currentHit = new Saw();
     }
 
     public JLabel getPlayer1() {
@@ -49,6 +53,7 @@ public class Robot extends IRobot {
     }
     
     public void fireWeapon (Panel p) {
+        p.getWeapon().setImage(currentWeapon.getImage());
         if(p.getRefreshTimer().isRunning()){
            p.getRefreshTimer().stop();
         }
@@ -56,6 +61,26 @@ public class Robot extends IRobot {
         p.getWeapon().setX(player1.getX());
         p.getWeapon().setY(player1.getY());
         p.getRefreshTimer().start();
+       
+    }
+    
+    public void strike (Panel p) {
+        p.getWeapon().setImage(currentHit.getImage());
+        if(p.getRefreshTimer().isRunning()){
+           p.getRefreshTimer().stop();
+        }
+        p.resetBulletLocation();
+        p.getWeapon().setX(player1.getX());
+        p.getWeapon().setY(player1.getY());
+        p.getRefreshTimer().start();
+        
+        try {
+            p.getRefreshTimer().wait((long) 300.0);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Robot.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        p.getRefreshTimer().stop();
        
     }
 }

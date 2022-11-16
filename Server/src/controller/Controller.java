@@ -45,6 +45,10 @@ public class Controller implements Runnable {
                 if (evt.getKeyCode() == KeyEvent.VK_1) {
                     fireWeapon ();                   
                 }
+                
+                if (evt.getKeyCode() == KeyEvent.VK_2) {
+                    strike ();                   
+                }
             }
         });
     }
@@ -100,6 +104,10 @@ public class Controller implements Runnable {
 
     public void fireWeapon () {
         this.player1.fireWeapon( view.getPanel());
+    }
+    
+    public void strike () {
+        this.player1.strike( view.getPanel());
     }
     
     public Robot getModel() {
