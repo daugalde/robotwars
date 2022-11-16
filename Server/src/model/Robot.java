@@ -2,9 +2,12 @@ package model;
 
 import java.awt.Graphics;
 import java.time.LocalTime;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import robotwar.common.robotbase.IRobot;
 import robotwar.common.robotbase.MOVEMENT;
+import view.Panel;
 
 /**
  *
@@ -44,5 +47,15 @@ public class Robot extends IRobot {
             player1.setLocation(player1.getX(), player1.getY() - 1);
         }
     }
-
+    
+    public void fireWeapon (Panel p) {
+        if(p.getRefreshTimer().isRunning()){
+           p.getRefreshTimer().stop();
+        }
+        p.resetBulletLocation();
+        p.getWeapon().setX(player1.getX());
+        p.getWeapon().setY(player1.getY());
+        p.getRefreshTimer().start();
+       
+    }
 }

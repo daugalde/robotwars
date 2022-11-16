@@ -120,7 +120,7 @@ public class View {
                 .addContainerGap(131, Short.MAX_VALUE))
         );
 
-        Panel backgroundPanel = new Panel();
+        backgroundPanel = new Panel();
         view.add(backgroundPanel, BorderLayout.CENTER);
         view.setLocationRelativeTo(null);
         view.pack();
@@ -128,6 +128,7 @@ public class View {
     }
 
     // Variables declaration - do not modify
+    private Panel backgroundPanel;
     private javax.swing.JFrame view;
     private javax.swing.JLabel trap1;
     private javax.swing.JLabel trap2;
@@ -203,4 +204,9 @@ public class View {
     public void setView(javax.swing.JFrame v) {
         this.view = v;
     }
+    
+    public Panel getPanel() {
+        return backgroundPanel;
+    }
+
 }

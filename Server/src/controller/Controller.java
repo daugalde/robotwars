@@ -41,6 +41,10 @@ public class Controller implements Runnable {
                 if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
                     setMovement(MOVEMENT.DOWN);
                 }
+                
+                if (evt.getKeyCode() == KeyEvent.VK_1) {
+                    fireWeapon ();                   
+                }
             }
         });
     }
@@ -94,6 +98,10 @@ public class Controller implements Runnable {
         }
     }
 
+    public void fireWeapon () {
+        this.player1.fireWeapon( view.getPanel());
+    }
+    
     public Robot getModel() {
         return player1;
     }
