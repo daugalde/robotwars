@@ -21,8 +21,8 @@ public class View {
         messageLabel = new javax.swing.JLabel();
         trap1 = new javax.swing.JLabel();
         trap2 = new javax.swing.JLabel();
-        scorePlayer1 = new javax.swing.JTextField();
-        scorePlayer2 = new javax.swing.JTextField();
+        scorePlayer1 = new javax.swing.JProgressBar ();
+        scorePlayer2 = new javax.swing.JProgressBar ();
         robotName1 = new javax.swing.JLabel();
         robotName2 = new javax.swing.JLabel();
 
@@ -45,13 +45,11 @@ public class View {
         trap2.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         trap2.setText("3");
 
-        scorePlayer1.setText("0");
-
-        scorePlayer2.setText("0");
-
-        scorePlayer1.setEnabled(false);
+        scorePlayer1.setValue(100);
+        scorePlayer1.setStringPainted(true);
+        scorePlayer2.setValue(100);
+        scorePlayer2.setStringPainted(true);
         
-        scorePlayer2.setEnabled(false);
         
         robotName1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         robotName1.setForeground(new java.awt.Color(255, 255, 255));
@@ -137,8 +135,8 @@ public class View {
     private javax.swing.JLabel messageLabel;
     private javax.swing.JLabel robotName1;
     private javax.swing.JLabel robotName2;
-    private javax.swing.JTextField scorePlayer1;
-    private javax.swing.JTextField scorePlayer2;
+    private javax.swing.JProgressBar  scorePlayer1;
+    private javax.swing.JProgressBar  scorePlayer2;
     // End of variables declaration                   
 
     public javax.swing.JLabel getPlayer1Label() {
@@ -181,19 +179,19 @@ public class View {
         this.trap2 = trap2;
     }
 
-    public javax.swing.JTextField getScorePlayer1() {
+    public javax.swing.JProgressBar   getScorePlayer1() {
         return scorePlayer1;
     }
 
-    public void setScorePlayer1(javax.swing.JTextField sp1) {
+    public void setScorePlayer1(javax.swing.JProgressBar   sp1) {
         this.scorePlayer1 = sp1;
     }
 
-    public javax.swing.JTextField getScorePlayer2() {
+    public javax.swing.JProgressBar   getScorePlayer2() {
         return scorePlayer2;
     }
 
-    public void setScorePlayer2(javax.swing.JTextField sp2) {
+    public void setScorePlayer2(javax.swing.JProgressBar   sp2) {
         this.scorePlayer2 = sp2;
     }
     

@@ -20,7 +20,7 @@ public class Controller implements Runnable {
     public Controller(String hostName) {
         client = new Client(hostName);
         this.view = new View();
-        this.model = new Robot();
+        this.model = new Robot(view.getPlayer1Label());
 
         this.view.getView().addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
