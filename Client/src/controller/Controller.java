@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import view.View;
 import java.io.EOFException;
 import java.io.IOException;
-import model.Model;
+import model.Robot;
 
 /**
  *
@@ -13,14 +13,14 @@ import model.Model;
  */
 public class Controller implements Runnable {
 
-    private Model model;
+    private Robot model;
     private final View view;
     private Client client;
 
     public Controller(String hostName) {
         client = new Client(hostName);
         this.view = new View();
-        this.model = new Model();
+        this.model = new Robot();
 
         this.view.getView().addKeyListener(new java.awt.event.KeyAdapter() {
             @Override
@@ -39,6 +39,11 @@ public class Controller implements Runnable {
 
                 if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
                     setMovement(4);
+                }
+                
+                if (evt.getKeyCode() == KeyEvent.VK_1) {
+                    System.out.println("Hit oponent");
+                    
                 }
             }
         });
@@ -111,11 +116,11 @@ public class Controller implements Runnable {
         }
     }
 
-    public Model getModel() {
+    public Robot getModel() {
         return model;
     }
 
-    public void setModel(Model model) {
+    public void setModel(Robot model) {
         this.model = model;
     }
 }
