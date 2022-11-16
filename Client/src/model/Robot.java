@@ -97,8 +97,8 @@ public class Robot extends IRobot{
         }
         return thisRobot;
     }
-
-
+    
+    @Override
     protected void refreshMove(MOVEMENT mvmnt, LocalTime lt, Graphics grphcs) {
         
         if (mvmnt.getValue() == 0) {
